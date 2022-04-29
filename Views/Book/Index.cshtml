@@ -1,0 +1,62 @@
+@model IEnumerable<Book>
+
+@{ 
+    ViewData["Title"] = "List of Books";
+}
+<h1>@ViewData["Title"]</h1>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 col-xs-6 border-primary mb-3">
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row h-50">
+                    <div class="col-md-12">
+                        <div class="card-header text-white bg-info">
+                            <p class="card-text">
+                                <h5 class="card-title">
+                                    @item.Name
+                                    <a class="text-white float-right"><i class="bi bi-pencil"></i></a>
+                                </h5>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <img src="@item.ImageURL" style="width: 175px; height: 280px; object-fit: cover;" />
+                    </div>
+                    <div class="col-md-7">
+                        <div class="card-body">
+                            <p class="card-text">@item.Description[0..40] ...</p>
+                            <p class="card-text"><b>Author: </b>@item.author.Fullname</p>
+                            <p class="card-text"><b>Price: </b>@item.Price</p>
+                            <p class="card-text"><b>Quantity: </b>@item.Quantity</p>
+                            <p class="card-text">
+                                <b>Status: </b>
+                                @if (item.Quantity == 0)
+                                {   
+                                    <span class="badge bg-danger text-white">OUT OF STOCK</span>
+                                }
+                                else if (item.Quantity == 1)
+                                {
+                                    <span class="badge bg-warning text-white">ONLY 1 LEFT</span> 
+                                }
+                                else
+                                { 
+                                    <span class="badge bg-success text-white">AVAILABLE</span>
+                                }
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="card-footer">
+                            <p class="card-text">
+                                <a class="btn btn-outline-primary float-right">Details</a>
+                                <a class="btn btn-success text-white">Add to cart</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+
+    }
+</div>
