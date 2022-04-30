@@ -11,6 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using eTickets.Data;
+using FPTBook.Data.Service;
 
 namespace FPTBook
 {
@@ -29,6 +30,9 @@ namespace FPTBook
             //DbContext configuration
             services.AddDbContext<AppDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));
 
+
+            //Services Configuration
+            services.AddScoped<IAuthorService, AuthorService>();
             services.AddControllersWithViews();
         }
 
