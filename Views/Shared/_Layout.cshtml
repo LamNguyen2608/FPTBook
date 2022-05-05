@@ -24,23 +24,30 @@
                             <a class="nav-link text-dark" asp-controller="Book" asp-action="Index"><i class="bi bi-book"></i> Books</a>
                         </li>
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="true">
-                                <i class="bi bi-gear"></i> Management
-                            </a>
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                                   aria-haspopup="true" aria-expanded="true">
+                                    <i class="bi bi-gear"></i> Management
+                                </a>
 
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" asp-controller="Author" asp-action="Index"><i class="bi bi-person-square"></i> Author</a>
-                                <a class="dropdown-item" asp-controller="Category" asp-action="Index"><i class="bi bi-book"></i> Category</a>                            
-                            </div>
-                        </li>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" asp-controller="Author" asp-action="Index"><i class="bi bi-person-square"></i> Author</a>
+                                    <a class="dropdown-item" asp-controller="Category" asp-action="Index"><i class="bi bi-book"></i> Category</a>
+                                </div>
+                            </li>
+                        }
+
+
                     </ul>
 
                     <form class="form-inline my-2 my-lg-0" style="padding-right: 25px;" asp-controller="Book" asp-action="Filter">
                         <input name="searchString" type="text" class="form-control" placeholder="Seach for a book..." />
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="bi bi-search"></i></button>
                     </form>
+
+                    <partial name="_Identity.cshtml" />
                 </div>
             </div>
         </nav>
@@ -59,7 +66,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-   
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

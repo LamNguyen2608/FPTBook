@@ -1,7 +1,7 @@
-using eTickets.Data;
-using eTickets.Data.Static;
-using eTickets.Data.ViewModels;
-using eTickets.Models;
+using FPTBook.Data;
+using FPTBook.Data.Static;
+using FPTBook.Data.ViewModels;
+using FPTBook.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,9 +16,9 @@ namespace eTickets.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly AppDbContext _context;
+        private readonly AppDBContext _context;
 
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, AppDbContext context)
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, AppDBContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;

@@ -12,6 +12,9 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using eTickets.Data;
 using FPTBook.Data.Service;
+using FPTBook.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace FPTBook
 {
@@ -34,6 +37,18 @@ namespace FPTBook
             //Services Configuration
             services.AddScoped<IAuthorService, AuthorService>();
             services.AddControllersWithViews();
+
+            //Authentication
+            services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AppDBContext>();
+            services.AddMemoryCache();
+            services.AddSession();
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            });
+
+            services.AddControllersWithViews();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
